@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Number System Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background-color: #f4f4f4;
+        }
+        .box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+        input, select {
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>Number System Converter</h2>
+        <label>Enter a number:</label>
+        <input type="text" id="numberInput" placeholder="Enter number...">
+        
+        <label>Convert from:</label>
+        <select id="fromBase">
+            <option value="10">Decimal</option>
+            <option value="2">Binary</option>
+            <option value="16">Hexadecimal</option>
+        </select>
+
+        <label>Convert to:</label>
+        <select id="toBase">
+            <option value="2">Binary</option>
+            <option value="10">Decimal</option>
+            <option value="16">Hexadecimal</option>
+        </select>
+
+        <button onclick="convert()">Convert</button>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function convert() {
+            const input = document.getElementById("numberInput").value.trim();
+            const from = parseInt(document.getElementById("fromBase").value);
+            const to = parseInt(document.getElementById("toBase").value);
+            const resultDiv = document.getElementById("result");
+
+            try {
+                const decimal = parseInt(input, from);
+                if (isNaN(decimal)) {
+                    throw new Error("Invalid input number.");
+                }
+                let result = decimal.toString(to).toUpperCase();
+                resultDiv.innerText = `Result: ${result}`;
+            } catch (e) {
+                resultDiv.innerText = "Error: " + e.message;
+            }
+        }
+    </script>
+</body>
+</html>
